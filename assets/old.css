@@ -1,0 +1,91 @@
+
+
+.app-wrapper {
+    width: 100%; 
+    height: auto; 
+    background-color: beige;
+    border: 3px solid black;
+    padding: 15px; /* Small screens need some padding */ 
+    margin-top: 100px; /* Potentially adjust margin for smaller screens */
+    position: relative; /* Allows absolute positioning within */
+    min-height: 100vh; /* Make it take up full viewport height */
+
+}
+.game-container {
+    border: 2px solid black;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Main container is a column  */
+    align-items: center; 
+}
+.top-section {
+    display: flex; /* Allow items to be in a row */
+    justify-content: space-between;
+    width: 100%; /* Make the 'top-row' fill the space */
+}
+.top-section > div { 
+    /* Style dealer-area and game-cards as  before if needed */
+    flex: 1; /* Allows them to take up remaining space */
+}
+.middle-section {
+     display: flex;
+     flex-direction: column; 
+     width: 100%;
+     align-items: center;
+}
+.bottom-section {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    align-items: center;
+}
+.dealer-area {
+    border: 2px solid black;
+    width: 40%; /* Or whatever percentage suits you */
+    margin: 15px; 
+
+}
+.game-cards {
+    border: 2px solid black;
+    width: 40%; /* Or whatever percentage suits you */
+    margin: 15px; 
+    
+
+}
+.betting-area {
+    border: 2px solid black;
+    width: 60%; /* Or whatever percentage suits you */
+    margin-bottom: 15px; 
+
+}
+.player-area {
+    border: 2px solid black;
+    width: 60%; /* Or whatever percentage suits you */
+    margin-bottom: 15px; 
+
+}
+.button-area {
+    border: 2px solid black;
+    width: 75%; /* Or whatever percentage suits you */
+    margin-bottom: 15px; 
+
+}
+.button-area button {
+    border: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    width: 200px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+footer {
+    border: 2px solid black;
+    margin: 25px;
+    bottom: 0;
+    width: 80%; 
+}
+
+
+

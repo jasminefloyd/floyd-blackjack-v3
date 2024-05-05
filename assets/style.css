@@ -1,0 +1,209 @@
+@media only screen and (max-width: 600px) { /* Adjust breakpoint as needed */
+    .game-container {
+      flex-direction: column; /* Stack dealer & cards vertically */
+    }
+  
+    .dealer-area, 
+    .game-cards {
+      width: 100%; /* Make them take up full width */
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+}
+
+.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 15px;
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Distribute content with space between */
+    align-items: center; /* Optional: Center content vertically */
+}
+
+.header > button {
+    background-color: #4CAF50; /* Green color */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.header > p {
+    font-size: large;
+    font-weight: bolder;
+    color: purple;
+}
+
+.popup {
+    display: none;        /* Initially hide the popup */
+    position: fixed;      /* Position over the window */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: white;  
+    padding: 25px;
+    padding-right: 35px;
+    border: 2px solid black;
+    border-radius: 5px;
+    z-index: 10; /* Ensure popup is above other content */
+    width: 80%;
+    text-align: left;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.game-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border: 3px solid orange;
+    background-image: url(./images/bg-table2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.top-section {
+    display: flex;
+    border: 3px solid black;
+    padding: 10px;
+
+}
+.dealer-area {
+    border: 2px solid black;
+    font-size: larger;
+    font-weight: bolder;
+    color: beige;
+    flex: 2;
+}
+
+.dealer-area > p {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.game-cards {
+    border: 2px solid blue;
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+}
+
+
+.middle-section {
+    display: flex;
+    border: 3px solid black;
+    padding: 10px;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.dealt-cards-area {
+    border: 2px solid black;
+    flex: 1;
+    padding: 5px;
+    font-size: larger;
+    font-weight: bolder;
+    color: beige;
+
+}
+
+.game-pot-area {
+    border: 2px solid black;
+    flex: 1;
+    padding: 5px;
+
+}
+
+.game-pot-area > p {
+    color: whitesmoke;
+}
+
+.game-pot-area > img {
+    height: 100px;
+}
+
+.play-message {
+    border: 2px solid black;
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+    font-size: larger;
+    font-weight: bolder;
+    color: beige;
+}
+
+.bottom-section {
+    display: flex;
+    border: 3px solid black;
+    padding: 10px;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-bet-area {
+    border: 3px solid yellowgreen;
+    padding: 10px;
+    font: bold;
+    color: aliceblue;
+
+}
+
+.button-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 5px solid red;
+    justify-content: center;
+    padding: 5px;
+}
+
+.game-buttons {
+    border: 5px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 200px;
+    margin: 2px;
+}
+
+
+.tagline {
+    flex: 1;
+    border: 3px solid black;
+    text-align: center;
+    padding: 10px;
+    color: whitesmoke;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    font-size: medium;
+}
+
+
+                  

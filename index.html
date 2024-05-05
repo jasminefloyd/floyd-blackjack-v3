@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>FDS Blackjack 3.0</title>
+</head>
+<body>
+    <div class="app-wrapper" id="">
+        <div class="header">
+            <p class="">FDS Blackjack 3.0</p>
+            <button class="game-btns" id="rules-btn">Rules</button>
+            <div id="game-rules" class="popup">
+                <span class="close-popup" onclick="closePopup()">&times;</span>
+                <h2>Blackjack Rules</h2> 
+                <ul>
+                    <li>Goal: Get 21 or higher than the dealer without going over 21.</li>
+                    <li>Cards: Numbers are their value, face cards = 10, Ace = 1 or 11</li>
+                    <li>Chips: Each player will start at $300 chips. Minimum bet is $5. Game is 2:1</li>
+                    <li>Player's Turn: Tap "Hit" for another card or "Stay" to keep your total</li>
+                    <li>Dealer: Must draw until their hand is 17 or higher</li>
+                    <li>To Win: If you're dealt 21, BLACKJACK!! - you instantly win! If you're closer to 21 than the dealer, or if the dealer busts (goes over 21)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="game-container" id="">
+            <div class="top-section">
+                <div class="dealer-area" id="">
+                    <p class="" id="dealer-cards">Dealer Area</p>
+                </div>
+                <div class="game-cards" id="">
+                    <img src="./assets/images/deck_blue.png" />
+                </div>
+            </div>
+
+            <div class="middle-section">
+                <div class="dealt-cards-area" id="">
+                    <p class="" id="dealt-cards">Dealt Cards Area</p>
+                </div>
+                <div class="game-pot-area" id="">
+                    <p class="" id="">Game Pot Area</p>
+                    <img class="game-pot-img" src="./assets/images/chips_stack.png" />
+                </div>
+                <p class="play-message" id="play-message">Play Message Area</p>
+            </div>
+
+            <div class="bottom-section">
+                <p class="player-bet-area" id="">Player betting area</p>
+                <div class="button-area" id="">
+                    <button class="game-buttons" id="play-again-btn">Play Again</button>
+                    <button class="game-buttons" id="hit-btn">Hit</button>
+                    <button class="game-buttons" id="stay-btn">Stay</button>
+                </div>
+            </div>
+            <p class="tagline">FDS Tagline</p>
+        </div>
+    </div>
+
+    <script src="./assets/index.js"></script>
+</body>
+</html>
