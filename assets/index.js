@@ -28,6 +28,13 @@ const playMessageEl = document.getElementById('play-message')
 const dealtCardsEl = document.getElementById('dealt-cards')
 const dealerCardsEl = document.getElementById('dealer-cards')
 
+//Audio Files
+const playerWinSound = new Audio('./assets/audio/round-won.wav')
+const playerLoseSound = new Audio('./assets/audio/awww.mp3')
+const blackjackWinSound = new Audio('./assets/audio/victory.mp3')
+const cardShuffleSound = new Audio('./assets/audio/quick_deal.wav')
+
+
 
 //Functions
 //Deal 2 random Cards
@@ -48,7 +55,7 @@ function dealDealerCards() {
   sum = firstCard + secondCard
   dealer.sum = sum
   dealer.cards = [firstCard, secondCard]
-  dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ? `
+  dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]},  🂠 `
 }
 
 
@@ -57,19 +64,28 @@ function checkWin() {
   if (player.sum > dealer.sum) {
     playMessageEl.innerHTML = `You Win! You have ${player.sum}`
     dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br /> Dealer has: ${dealer.sum}`
+    <br />
+    Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
+    playerWinSound.play()
   } 
   else if (player.sum < dealer.sum) {
     playMessageEl.innerHTML = `You Lose, Dealer Wins!`
+    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
+    <br />
+    Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
+    playerLoseSound.play()
   }
   else {
     playMessageEl.innerHTML = `Push! Nobody Wins`
+    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
+    <br />
+    Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -82,15 +98,23 @@ function checkWin() {
 function checkBlackjack() {
   if (player.sum === 21) {
     playMessageEl.innerHTML = `Blackjack!! You Win`
+    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
+    <br />
+    Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
+    blackjackWinSound.play()
   } 
   else if (player.sum > 21){
     playMessageEl.innerHTML = `BUSTED! You Lose`
+    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
+    <br />
+    Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
+    playerLoseSound.play()
   } 
   else {
     playMessageEl.innerHTML = `You have ${player.sum}. Hit or Stay?`
@@ -112,6 +136,7 @@ function playerStay() {
 }
 
 function playAgain() {
+  cardShuffleSound.play()
   hitBtnEl.style.display = `initial`
   stayBtnEl.style.display = `initial`
   playAgainBtnEl.style.display = `initial`
