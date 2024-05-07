@@ -45,6 +45,7 @@ function dealPlayerCards() {
   player.sum = sum
   player.cards = [firstCard, secondCard]
   dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
+  playMessageEl.style.display = ('block')
   playMessageEl.innerHTML = `You have ${player.sum}`
 }
 
