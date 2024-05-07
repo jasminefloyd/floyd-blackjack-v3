@@ -1,31 +1,35 @@
-@media only screen and (max-width: 600px) { /* Adjust breakpoint as needed */
-    .game-container {
-      flex-direction: column; /* Stack dealer & cards vertically */
-    }
-  
-    .dealer-area, 
-    .game-cards {
-      width: 100%; /* Make them take up full width */
-    }
-}
-
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     
 }
 
 .app-wrapper {
-    display: flex;
+    display: flex;  /* Enables Flexbox layout */
+    position: fixed;  /* Ensures full viewport coverage */
     flex-direction: column;
-    width: 100%;
-    height: fit-content;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgray;  /* Optional: Set background color */
+    border: 5px solid black;
+    box-sizing: border-box;
+    background-image: url(./images/bg-table2.png);
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+}
+
+.game-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .header {
     top: 0;
-    left: 0;
+    flex: 1;
     width: 100%;
     background-color: #f0f0f0;
     padding: 15px;
@@ -75,17 +79,11 @@ html, body {
     cursor: pointer;
 }
 
-.game-container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    background-image: url(./images/bg-table2.png);
-    background-size: cover;
-    background-position: center;
-}
 
 .top-section {
     display: flex;
+    flex: 1;
+    top: 0;
     padding: 10px;
 
 }
@@ -110,10 +108,14 @@ html, body {
 
 .middle-section {
     display: flex;
+    flex: 1;
     padding: 10px;
     margin-top: 10px;
     flex-direction: column;
     align-items: center;
+    top: 0;
+    width: 100%;
+    border: 4px solid black;
 }
 
 
@@ -127,45 +129,75 @@ html, body {
 }
 
 .game-pot-area {
-    flex: 1;
-    padding: 5px;
-
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 4px solid black;
+    align-items: center;
 }
-
-.game-pot-area > p {
-    color: whitesmoke;
-}
-
 .game-pot-area > img {
     height: 100px;
+    width: 100px;
+}
+
+.pot-amount-message {
+    color: whitesmoke;
+    margin: 0;
+    font-size: large;
 }
 
 .play-message {
-    flex: 1;
+    color: black;
+    background-color: darkgray;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
     text-align: center;
     padding: 5px;
-    font-size: larger;
-    font-weight: bolder;
-    color: beige;
+
 }
 
 .bottom-section {
     display: flex;
-    padding: 10px;
+    flex: 1;
     margin-top: 10px;
     flex-direction: column;
+    align-content: center;
     align-items: center;
+    top: 0;
+    width: 100%;
+    
 }
 
 .bid-area {
+    flex: 1;
     display: flex;
-    justify-items: center;
     align-items: center;
-    padding: 10px;
+    width: 100%;
+    align-self: center;
+}
+
+.player-wallet {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    margin-left: 15px;
+}
+
+.player-wallet-message {
+    font-weight: bold;
+}
+
+.player-wallet-img {
+    height: 75px;
+    width: 75px;
 }
 
 .bet-button-area {
     display: flex;
+    flex: 3;
     flex-wrap: wrap;
     padding: 15px;
     align-items: center;
@@ -173,19 +205,23 @@ html, body {
 
 }
 
-.player-wallet-img {
-    height: 75px;
+.bet-message {
+    display: flex;
+    width: 100%;
+    margin: 0 2;
 }
 
-.bet-buttons{
+
+.bet-buttons {
     background-color: gold;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-weight: bold;
     border-radius: 5px;
-    width: 70px;
+    width: 80px;
     height: 35px;
     margin: 1px;
+    flex: 1;
+    text-align: center;
 }
 
 .button-area {
@@ -193,10 +229,12 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: center;
     padding: 5px;
 }
 
 .game-buttons {
+    display: flex;
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
@@ -205,15 +243,20 @@ html, body {
     margin: 2px;
 }
 
+.fds-footer {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+}
 
 .tagline {
-    flex: 1;
-    text-align: center;
     padding: 10px;
     color: #e4e4e4;
     font-family: 'Indie Flower', cursive;
     font-weight: bold;
     font-size: medium;
+    text-align: center;
 }
 
 
