@@ -13,6 +13,15 @@ const dealer = {
   sum: 0
 }
 
+let deck = [
+  { image: "./assets/images/cards/ace_of_hearts.png", value: 11 },
+  { image: "./assets/images/cards/2_of_clubs.png", value: 2 },
+  { image: "./assets/images/cards/king_of_spades.png", value: 10 },
+  { image: "./assets/images/cards/7_of_clubs.png", value: 7 },
+  { image: "./assets/images/cards/10_of_hearts.png", value: 10 },
+  { image: "./assets/images/cards/6_of_diamonds.png", value: 6 },
+];
+
 //Global Variables
 var firstCard
 var secondCard
@@ -27,6 +36,10 @@ const stayBtnEl = document.getElementById('stay-btn')
 const playMessageEl = document.getElementById('play-message')
 const dealtCardsEl = document.getElementById('dealt-cards')
 const dealerCardsEl = document.getElementById('dealer-cards')
+const tableCard1El = document.getElementById('tCard1')
+const tableCard2El = document.getElementById('tCard2')
+const tableCard3El = document.getElementById('tCard3')
+const tableCard4El = document.getElementById('tCard4')
 
 //Audio Files
 const playerWinSound = new Audio('./assets/audio/round-won.wav')
@@ -35,19 +48,42 @@ const blackjackWinSound = new Audio('./assets/audio/victory.mp3')
 const cardShuffleSound = new Audio('./assets/audio/quick_deal.wav')
 
 
-
 //Functions
-//Deal 2 random Cards
+
+function selectRandomCard(deck) {
+  const randomIndex = Math.floor(Math.random() * deck.length)
+  return deck[randomIndex]
+}
+
+// New Deal function w/ Card images 
 function dealPlayerCards() {
-  firstCard = (Math.floor(Math.random() * 11) + 1)
-  secondCard = (Math.floor(Math.random() * 11) + 1)
-  sum = firstCard + secondCard
+  firstCard = selectRandomCard(deck)
+  secondCard = selectRandomCard(deck)
+  sum = firstCard.value + secondCard.value
   player.sum = sum
-  player.cards = [firstCard, secondCard]
-  dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
-  playMessageEl.style.display = ('block')
+  // player.cards = [firstCard, secondCard]
+  dealtCardsEl.innerHTML = "Cards: "
+  tableCard1El.src = `${firstCard.image}`
+  tableCard2El.src = `${secondCard.image}`
+  tableCard3El.style.display = ('none')
+  tableCard4El.style.display = ('none')
+  playMessageEl.style.display = ('initial')
   playMessageEl.innerHTML = `You have ${player.sum}`
 }
+
+
+
+// //Deal 2 random Cards (old version)
+// function dealPlayerCards() {
+//   firstCard = (Math.floor(Math.random() * 11) + 1)
+//   secondCard = (Math.floor(Math.random() * 11) + 1)
+//   sum = firstCard + secondCard
+//   player.sum = sum
+//   player.cards = [firstCard, secondCard]
+//   dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
+//   playMessageEl.style.display = ('block')
+//   playMessageEl.innerHTML = `You have ${player.sum}`
+// }
 
 //Deal 2 cards to the dealer, only display the first card
 function dealDealerCards() {

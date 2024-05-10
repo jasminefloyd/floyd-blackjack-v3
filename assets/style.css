@@ -126,8 +126,28 @@ html, body {
     font-size: larger;
     font-weight: bolder;
     color: beige;
+    border: 3px black solid;
+    width: 100%;
+}
+
+.dc-message-area{
+    border: 3px black solid;
+}
+.dc-cards-area{
+    display: flex;
+    justify-content: center;
+    height: 85px;
+    padding: 10px;
+    border: 3px yellow solid;
 
 }
+
+.table-cards-img{
+    margin-left: 5px;
+}
+
+
+
 
 .game-pot-area {
     display: flex;
@@ -225,14 +245,13 @@ html, body {
     text-align: center;
 }
 
-.button-area {
+.game-button-area {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    padding: 5px;
-    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid black;
 }
 
 .game-buttons {
@@ -241,7 +260,7 @@ html, body {
     padding-bottom: 10px;
     font-weight: bold;
     border-radius: 5px;
-    width: 200px;
+    width: 60%;
     margin: 2px;
     text-align: center;
 }
