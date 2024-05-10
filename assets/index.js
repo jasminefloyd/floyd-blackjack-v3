@@ -138,14 +138,16 @@ function playerHit() {
     tableCard3El.style.display = ('initial')
     tableCard3El.src = `${card.image}`
     playMessageEl.innerHTML = `You have ${player.sum}`
-    checkBlackjack()
+    checkBusted()
   } 
   else {
   tableCard4El.style.display = ('initial')
   tableCard4El.src = `${card.image}`
   playMessageEl.innerHTML = `You have ${player.sum}`
+  checkBusted()
 }
-checkBlackjack()
+
+
 }
 
 
@@ -158,17 +160,17 @@ function checkWin() {
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
-    playAgainBtnEl.style.display = `flex`
+    playAgainBtnEl.style.display = `initial`
     playerWinSound.play()
   } 
   else if (player.sum < dealer.sum) {
-    playMessageEl.innerHTML = `You Lose, Dealer Wins!`
+    playMessageEl.innerHTML = `You lose! Dealer Wins!`
     dealerCard2El.src = `${dealer.card2}`
     dealerMessageEl.style.display = ('block')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
-    playAgainBtnEl.style.display = `flex`
+    playAgainBtnEl.style.display = `initial`
     playerLoseSound.play()
   }
   else {
@@ -192,27 +194,28 @@ function checkBlackjack() {
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
-    playAgainBtnEl.style.display = `flex`
+    playAgainBtnEl.style.display = `initial`
     blackjackWinSound.play()
   } 
-  else if (player.sum > 21){
+}
+
+function checkBusted() {
+  if (player.sum > 21){
     playMessageEl.innerHTML = `BUSTED! You Lose`
-    dealerCard2El.src = `${card.image}`
-    dealerMessageEl.style.display = ('initial')
+    dealerCard2El.src = `${dealer.card2}`
+    dealerMessageEl.style.display = `block`
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
-    playAgainBtnEl.style.display = `flex`
+    playAgainBtnEl.style.display = `initial`
     playerLoseSound.play()
   } 
-  else {
-    playMessageEl.innerHTML = `You have ${player.sum}. Hit or Stay?`
-    playAgainBtnEl.style.display = `none`
-  }
 }
 
 
+
 function playerStay() {
+  checkBusted()
   checkWin()
 }
 
@@ -220,10 +223,11 @@ function playAgain() {
   cardShuffleSound.play()
   hitBtnEl.style.display = `initial`
   stayBtnEl.style.display = `initial`
-  playAgainBtnEl.style.display = `initial`
+  playAgainBtnEl.style.display = `none`
   dealPlayerCards()
   dealDealerCards()
   checkBlackjack()
+  checkBusted()
 }
 
 
