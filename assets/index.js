@@ -2,7 +2,6 @@
 const player = {
   name: "",
   chips: 0,
-  cards: [],
   sum: 0
 }
 
@@ -13,13 +12,60 @@ const dealer = {
   sum: 0
 }
 
+
 let deck = [
-  { image: "./assets/images/cards/ace_of_hearts.png", value: 11 },
-  { image: "./assets/images/cards/2_of_clubs.png", value: 2 },
-  { image: "./assets/images/cards/king_of_spades.png", value: 10 },
-  { image: "./assets/images/cards/7_of_clubs.png", value: 7 },
-  { image: "./assets/images/cards/10_of_hearts.png", value: 10 },
-  { image: "./assets/images/cards/6_of_diamonds.png", value: 6 },
+  { image: "./assets/images/cards/2_of_clubs.png" , value: 2 },
+  { image: "./assets/images/cards/2_of_diamonds.png" , value: 2 },
+  { image: "./assets/images/cards/2_of_hearts.png" , value: 2 },
+  { image: "./assets/images/cards/2_of_spades.png" , value: 2 },
+  { image: "./assets/images/cards/3_of_clubs.png" , value: 3 },
+  { image: "./assets/images/cards/3_of_diamonds.png" , value: 3 },
+  { image: "./assets/images/cards/3_of_hearts.png" , value: 3 },
+  { image: "./assets/images/cards/3_of_spades.png" , value: 3 },
+  { image: "./assets/images/cards/4_of_clubs.png" , value: 4 },
+  { image: "./assets/images/cards/4_of_diamonds.png" , value: 4 },
+  { image: "./assets/images/cards/4_of_hearts.png" , value: 4 },
+  { image: "./assets/images/cards/4_of_spades.png" , value: 4 },
+  { image: "./assets/images/cards/5_of_clubs.png" , value: 5 },
+  { image: "./assets/images/cards/5_of_diamonds.png" , value: 5 },
+  { image: "./assets/images/cards/5_of_hearts.png" , value: 5 },
+  { image: "./assets/images/cards/5_of_spades.png" , value: 5 },
+  { image: "./assets/images/cards/6_of_clubs.png" , value: 6 },
+  { image: "./assets/images/cards/6_of_diamonds.png" , value: 6 },
+  { image: "./assets/images/cards/6_of_hearts.png" , value: 6 },
+  { image: "./assets/images/cards/6_of_spades.png" , value: 6 },
+  { image: "./assets/images/cards/7_of_clubs.png" , value: 7 },
+  { image: "./assets/images/cards/7_of_diamonds.png" , value: 7 },
+  { image: "./assets/images/cards/7_of_hearts.png" , value: 7 },
+  { image: "./assets/images/cards/7_of_spades.png" , value: 7 },
+  { image: "./assets/images/cards/8_of_clubs.png" , value: 8 },
+  { image: "./assets/images/cards/8_of_diamonds.png" , value: 8 },
+  { image: "./assets/images/cards/8_of_hearts.png" , value: 8 },
+  { image: "./assets/images/cards/8_of_spades.png" , value: 8 },
+  { image: "./assets/images/cards/9_of_clubs.png" , value: 9 },
+  { image: "./assets/images/cards/9_of_diamonds.png" , value: 9 },
+  { image: "./assets/images/cards/9_of_hearts.png" , value: 9 },
+  { image: "./assets/images/cards/9_of_spades.png" , value: 9 },
+  { image: "./assets/images/cards/10_of_clubs.png" , value: 10 },
+  { image: "./assets/images/cards/10_of_diamonds.png" , value: 10 },
+  { image: "./assets/images/cards/10_of_hearts.png" , value: 10 },
+  { image: "./assets/images/cards/10_of_spades.png" , value: 10 },
+  { image: "./assets/images/cards/ace_of_clubs.png" , value: 11 },
+  { image: "./assets/images/cards/ace_of_diamonds.png" , value: 11 },
+  { image: "./assets/images/cards/ace_of_hearts.png" , value: 11 },
+  { image: "./assets/images/cards/ace_of_spades.png" , value: 11 },
+  { image: "./assets/images/cards/jack_of_clubs.png" , value: 10 },
+  { image: "./assets/images/cards/jack_of_diamonds.png" , value: 10 },
+  { image: "./assets/images/cards/jack_of_hearts.png" , value: 10 },
+  { image: "./assets/images/cards/jack_of_spades.png" , value: 10 },
+  { image: "./assets/images/cards/king_of_clubs.png" , value: 10 },
+  { image: "./assets/images/cards/king_of_diamonds.png" , value: 10 },
+  { image: "./assets/images/cards/king_of_hearts.png" , value: 10 },
+  { image: "./assets/images/cards/king_of_spades.png" , value: 10 },
+  { image: "./assets/images/cards/queen_of_clubs.png" , value: 10 },
+  { image: "./assets/images/cards/queen_of_diamonds.png" , value: 10 },
+  { image: "./assets/images/cards/queen_of_hearts.png" , value: 10 },
+  { image: "./assets/images/cards/queen_of_spades.png" , value: 10 },
 ];
 
 //Global Variables
@@ -65,8 +111,6 @@ function dealPlayerCards() {
   secondCard = selectRandomCard(deck)
   sum = firstCard.value + secondCard.value
   player.sum = sum
-  // player.cards = [firstCard.image, secondCard.image]
-  // dealtCardsEl.innerHTML = "Cards: "
   tableCard1El.src = `${firstCard.image}`
   tableCard2El.src = `${secondCard.image}`
   tableCard3El.style.display = ('none')
@@ -85,12 +129,10 @@ function dealDealerCards() {
   dealer.sum = sum
   dealer.card2 = secondCard.image
   dealerCard1El.src = `${firstCard.image}`
-  // dealer.cards = [firstCard, secondCard]
 }
 
 function playerHit() {
   let card = selectRandomCard(deck)
-  // player.cards.push(card)
   player.sum += card.value
   if (tableCard3El.style.display == 'none') {
     tableCard3El.style.display = ('initial')
@@ -170,7 +212,6 @@ function checkBlackjack() {
 }
 
 
-
 function playerStay() {
   checkWin()
 }
@@ -184,19 +225,6 @@ function playAgain() {
   dealDealerCards()
   checkBlackjack()
 }
-
-
-// Write a method for players turn:
-// - ask them hit/stay?
-// - deal them 1 card if hit
-// - if stay, check blackjack
-// - if bust or blackjack deliver message
-
-// Once game over, and outcome correctly reported, ask player if they want to play again & loop back through game after shuffling.  
-
-
-
-
 
 
 function openPopup() {
@@ -215,32 +243,3 @@ stayBtnEl.addEventListener('click', playerStay)
 
 
 
-// //Deal 2 random Cards (old version)
-// function dealPlayerCards() {
-//   firstCard = (Math.floor(Math.random() * 11) + 1)
-//   secondCard = (Math.floor(Math.random() * 11) + 1)
-//   sum = firstCard + secondCard
-//   player.sum = sum
-//   player.cards = [firstCard, secondCard]
-//   dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
-//   playMessageEl.style.display = ('block')
-//   playMessageEl.innerHTML = `You have ${player.sum}`
-// }
-
-// function playerHit() {
-//   let card = (Math.floor(Math.random() * 11) + 1)
-//   player.cards.push(card)
-//   player.sum += card
-//   dealtCardsEl.innerHTML = `Cards: ${player.cards.join(', ')}`
-//   playMessageEl.innerHTML = `You have ${player.sum}`
-//   checkBlackjack()
-// }
-
-// function dealDealerCards() {
-  //   firstCard = (Math.floor(Math.random() * 11) + 1)
-  //   secondCard = (Math.floor(Math.random() * 11) + 1)
-  //   sum = firstCard + secondCard
-  //   dealer.sum = sum
-  //   dealer.cards = [firstCard, secondCard]
-  //   dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]},  🂠 `
-  // }
