@@ -9,8 +9,8 @@ html, body {
     flex-direction: column;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100%;
+    width: 100%;
+    height:max-content;
     background-color: lightgray;  /* Optional: Set background color */
     border: 5px solid black;
     box-sizing: border-box;
@@ -91,20 +91,32 @@ html, body {
     font-size: x-large;
     font-weight: bolder;
     color: beige;
-    flex: 2;
+    padding: 10px;
+}
+
+#dCard1, #dCard2{
+    height: 85px;
 }
 
 .dealer-area > p {
-    text-align: left;
-    margin-top: 50px;
-    padding-left: 25px;
-    
+    color: black;
+    font-size: medium;
+    background-color: darkgray;
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    display: none;
+    margin-top: 15px;
 }
+
 
 .game-cards {
     flex: 1;
     text-align: center;
     padding: 15px;
+    height: 85px;
 }
 
 
@@ -126,19 +138,14 @@ html, body {
     font-size: larger;
     font-weight: bolder;
     color: beige;
-    border: 3px black solid;
     width: 100%;
 }
 
-.dc-message-area{
-    border: 3px black solid;
-}
 .dc-cards-area{
     display: flex;
     justify-content: center;
     height: 85px;
     padding: 10px;
-    border: 3px yellow solid;
 
 }
 
@@ -251,7 +258,6 @@ html, body {
     width: 100%;
     align-items: center;
     padding: 10px;
-    border: 2px solid black;
 }
 
 .game-buttons {

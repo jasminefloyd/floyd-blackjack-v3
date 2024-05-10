@@ -9,7 +9,7 @@ const player = {
 const dealer = {
   name: "",
   chips: 0,
-  cards: [],
+  card2: [],
   sum: 0
 }
 
@@ -35,11 +35,15 @@ const stayBtnEl = document.getElementById('stay-btn')
 
 const playMessageEl = document.getElementById('play-message')
 const dealtCardsEl = document.getElementById('dealt-cards')
-const dealerCardsEl = document.getElementById('dealer-cards')
 const tableCard1El = document.getElementById('tCard1')
 const tableCard2El = document.getElementById('tCard2')
 const tableCard3El = document.getElementById('tCard3')
 const tableCard4El = document.getElementById('tCard4')
+const dealerCard1El = document.getElementById('dCard1')
+const dealerCard2El = document.getElementById('dCard2')
+const dealerMessageEl = document.getElementById('dealerMessage')
+
+
 
 //Audio Files
 const playerWinSound = new Audio('./assets/audio/round-won.wav')
@@ -61,8 +65,8 @@ function dealPlayerCards() {
   secondCard = selectRandomCard(deck)
   sum = firstCard.value + secondCard.value
   player.sum = sum
-  // player.cards = [firstCard, secondCard]
-  dealtCardsEl.innerHTML = "Cards: "
+  // player.cards = [firstCard.image, secondCard.image]
+  // dealtCardsEl.innerHTML = "Cards: "
   tableCard1El.src = `${firstCard.image}`
   tableCard2El.src = `${secondCard.image}`
   tableCard3El.style.display = ('none')
@@ -73,26 +77,33 @@ function dealPlayerCards() {
 
 
 
-// //Deal 2 random Cards (old version)
-// function dealPlayerCards() {
-//   firstCard = (Math.floor(Math.random() * 11) + 1)
-//   secondCard = (Math.floor(Math.random() * 11) + 1)
-//   sum = firstCard + secondCard
-//   player.sum = sum
-//   player.cards = [firstCard, secondCard]
-//   dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
-//   playMessageEl.style.display = ('block')
-//   playMessageEl.innerHTML = `You have ${player.sum}`
-// }
-
 //Deal 2 cards to the dealer, only display the first card
 function dealDealerCards() {
-  firstCard = (Math.floor(Math.random() * 11) + 1)
-  secondCard = (Math.floor(Math.random() * 11) + 1)
-  sum = firstCard + secondCard
+  firstCard = selectRandomCard(deck)
+  secondCard = selectRandomCard(deck)
+  sum = firstCard.value + secondCard.value
   dealer.sum = sum
-  dealer.cards = [firstCard, secondCard]
-  dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]},  🂠 `
+  dealer.card2 = secondCard.image
+  dealerCard1El.src = `${firstCard.image}`
+  // dealer.cards = [firstCard, secondCard]
+}
+
+function playerHit() {
+  let card = selectRandomCard(deck)
+  // player.cards.push(card)
+  player.sum += card.value
+  if (tableCard3El.style.display == 'none') {
+    tableCard3El.style.display = ('initial')
+    tableCard3El.src = `${card.image}`
+    playMessageEl.innerHTML = `You have ${player.sum}`
+    checkBlackjack()
+  } 
+  else {
+  tableCard4El.style.display = ('initial')
+  tableCard4El.src = `${card.image}`
+  playMessageEl.innerHTML = `You have ${player.sum}`
+}
+checkBlackjack()
 }
 
 
@@ -100,9 +111,9 @@ function dealDealerCards() {
 function checkWin() {
   if (player.sum > dealer.sum) {
     playMessageEl.innerHTML = `You Win! You have ${player.sum}`
-    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br />
-    Dealer has ${dealer.sum}`
+    dealerCard2El.src = `${dealer.card2}`
+    dealerMessageEl.style.display = ('block')
+    dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -110,9 +121,9 @@ function checkWin() {
   } 
   else if (player.sum < dealer.sum) {
     playMessageEl.innerHTML = `You Lose, Dealer Wins!`
-    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br />
-    Dealer has ${dealer.sum}`
+    dealerCard2El.src = `${dealer.card2}`
+    dealerMessageEl.style.display = ('block')
+    dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -120,14 +131,13 @@ function checkWin() {
   }
   else {
     playMessageEl.innerHTML = `Push! Nobody Wins`
-    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br />
-    Dealer has ${dealer.sum}`
+    dealerCard2El.src = `${dealer.card2}`
+    dealerMessageEl.style.display = ('block')
+    dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
   }
-  
 }
 
 
@@ -135,9 +145,9 @@ function checkWin() {
 function checkBlackjack() {
   if (player.sum === 21) {
     playMessageEl.innerHTML = `Blackjack!! You Win`
-    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br />
-    Dealer has ${dealer.sum}`
+    dealerCard2El.src = `${card.image}`
+    dealerMessageEl.style.display = ('initial')
+    dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -145,9 +155,9 @@ function checkBlackjack() {
   } 
   else if (player.sum > 21){
     playMessageEl.innerHTML = `BUSTED! You Lose`
-    dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]}, ${dealer.cards[1]}
-    <br />
-    Dealer has ${dealer.sum}`
+    dealerCard2El.src = `${card.image}`
+    dealerMessageEl.style.display = ('initial')
+    dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -159,14 +169,7 @@ function checkBlackjack() {
   }
 }
 
-function playerHit() {
-  let card = (Math.floor(Math.random() * 11) + 1)
-  player.cards.push(card)
-  player.sum += card
-  dealtCardsEl.innerHTML = `Cards: ${player.cards.join(', ')}`
-  playMessageEl.innerHTML = `You have ${player.sum}`
-  checkBlackjack()
-}
+
 
 function playerStay() {
   checkWin()
@@ -209,3 +212,35 @@ buttonEl.addEventListener('click', openPopup)
 playAgainBtnEl.addEventListener('click', playAgain)
 hitBtnEl.addEventListener('click', playerHit)
 stayBtnEl.addEventListener('click', playerStay)
+
+
+
+// //Deal 2 random Cards (old version)
+// function dealPlayerCards() {
+//   firstCard = (Math.floor(Math.random() * 11) + 1)
+//   secondCard = (Math.floor(Math.random() * 11) + 1)
+//   sum = firstCard + secondCard
+//   player.sum = sum
+//   player.cards = [firstCard, secondCard]
+//   dealtCardsEl.innerHTML = `Cards: ${player.cards[0]}, ${player.cards[1]}`
+//   playMessageEl.style.display = ('block')
+//   playMessageEl.innerHTML = `You have ${player.sum}`
+// }
+
+// function playerHit() {
+//   let card = (Math.floor(Math.random() * 11) + 1)
+//   player.cards.push(card)
+//   player.sum += card
+//   dealtCardsEl.innerHTML = `Cards: ${player.cards.join(', ')}`
+//   playMessageEl.innerHTML = `You have ${player.sum}`
+//   checkBlackjack()
+// }
+
+// function dealDealerCards() {
+  //   firstCard = (Math.floor(Math.random() * 11) + 1)
+  //   secondCard = (Math.floor(Math.random() * 11) + 1)
+  //   sum = firstCard + secondCard
+  //   dealer.sum = sum
+  //   dealer.cards = [firstCard, secondCard]
+  //   dealerCardsEl.innerHTML = `Card: ${dealer.cards[0]},  🂠 `
+  // }
