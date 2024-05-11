@@ -18,14 +18,7 @@
             <div id="game-rules" class="popup">
                 <span class="close-popup" onclick="closePopup()">&times;</span>
                 <h2>Blackjack Rules</h2> 
-                <ul>
-                    <li>Goal: Get 21 or higher than the dealer without going over 21.</li>
-                    <li>Cards: Numbers are their value, face cards = 10, Ace = 1 or 11</li>
-                    <li>Chips: Each player will start at $300 chips. Minimum bet is $5. Game is 2:1</li>
-                    <li>Player's Turn: Tap "Hit" for another card or "Stay" to keep your total</li>
-                    <li>Dealer: Must draw until their hand is 17 or higher</li>
-                    <li>To Win: If you're dealt 21, BLACKJACK!! - you instantly win! If you're closer to 21 than the dealer, or if the dealer busts (goes over 21)</li>
-                </ul>
+                <p id="game-rules-message"></p>
             </div>
         </div>
         <div class="game-container" id="">
@@ -42,7 +35,7 @@
 
             <div class="middle-section">
                 <div class="dealt-cards-area">
-                    <div class="dc-cards-area">
+                    <div class="dc-cards-area" id="dc-cards-area">
                         <img class="table-cards-img" id="tCard1" src="./assets/images/cards/card_red_back.png" />
                         <img class="table-cards-img" id="tCard2" src="./assets/images/cards/card_red_back.png" />
                         <img class="table-cards-img" id="tCard3" src="./assets/images/cards/card_red_back.png" />
@@ -60,10 +53,10 @@
                 <div class="bid-area" id="">
                     <div class="player-wallet">
                         <img class="player-wallet-img" id="" src="./assets/images/chips_stack.png" />
-                        <p class="player-wallet-message" id="player-wallet-message">Player: $3000</p>
+                        <p class="player-wallet-message" id="player-wallet-message"></p>
                     </div>
                     <div class="bet-button-area" id="bet-button-area">
-                        <p class="bet-message" id="bet-message">Place your bets</p>
+                        <p class="bet-message" id="bet-message">Place your bets (Bet min: $50)</p>
                         <button class="bet-buttons" id="twenty-five-btn">$25</button>
                         <button class="bet-buttons" id="fifty-btn">$50</button>
                         <button class="bet-buttons" id="hundred-btn">$100</button>

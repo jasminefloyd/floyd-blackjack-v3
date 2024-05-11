@@ -68,6 +68,9 @@ let deck = [
   { image: "./assets/images/cards/queen_of_spades.png" , value: 10 },
 ];
 
+
+
+
 //Global Variables
 var firstCard
 var secondCard
@@ -85,8 +88,10 @@ const fiftyBtnEl = document.getElementById('fifty-btn')
 const allInBtnEl = document.getElementById('all-in-btn')
 const hundredBtnEl = document.getElementById('hundred-btn')
 
+const gameRulesMessageEl = document.getElementById(`game-rules-message`)
+const gameRulesEl = document.getElementById(`game-rules`)
 const playMessageEl = document.getElementById('play-message')
-const dealtCardsEl = document.getElementById('dealt-cards')
+const dcCardsAreaEl = document.getElementById('dc-cards-area')
 const tableCard1El = document.getElementById('tCard1')
 const tableCard2El = document.getElementById('tCard2')
 const tableCard3El = document.getElementById('tCard3')
@@ -260,7 +265,7 @@ function betHundred() {
 
 function betAllIn() {
   gamePot += player.chips
-  player.chips -= gamePot
+  player.chips = 0
   potAmountMessageEl.innerHTML = `Bet Amount: ${gamePot}`
   playerWalletMessageEl.innerHTML = `Player: $${player.chips}`
   buttonChecker()
@@ -286,8 +291,6 @@ function buttonChecker() {
     hundredBtnEl.disabled = true;
     fiftyBtnEl.disabled = true;
     twentyFiveBtnEl.disabled = true;
-    betMessageEl.style.color = ('red')
-    betMessageEl.style.fontWeight = ('bold')
     betMessageEl.innerHTML = `You're out of chips!`
     
   }
@@ -310,6 +313,7 @@ function playGame() {
 }
 
 function resetGame() {
+  setRules()
   gamePot = 0
   betButtonAreaEl.style.visibility = `initial`
   hitBtnEl.style.display = `none`
@@ -318,6 +322,10 @@ function resetGame() {
   dealerMessageEl.style.display = `none`
   potAmountMessageEl.innerHTML = ` `
   playMessageEl.style.display = `none`
+  playerWalletMessageEl.innerHTML = `Player: ${player.chips}`
+  dcCardsAreaEl.style.visibility = `hidden`
+  dealerCard1El.style.visibility = `hidden`
+  dealerCard2El.style.visibility = `hidden`
   }
 
 function playGameAgain () {
@@ -331,12 +339,28 @@ function startGame() {
   dealerMessageEl.style.display = `none`
   potAmountMessageEl.innerHTML = ` `
   betButtonAreaEl.style.visibility = `hidden`
+  dcCardsAreaEl.style.visibility = `initial`
+  dealerCard1El.style.visibility = `initial`
+  dealerCard2El.style.visibility = `initial`
 }
 
 
 function openPopup() {
     document.getElementById("game-rules").style.display = "block"
   }
+
+function setRules() {
+  gameRulesMessageEl.innerText = `
+  🎯 | Goal: Get 21 or higher than the dealer without going over 21. 
+
+  🃏 | Cards: Numbers are their value, face cards = 10, Ace = 11
+
+  💵 | Chips: Each player will start at $1000 chips. Minimum bet is $50. Game is 1:1
+
+  🎰 | Player's Turn: Tap "Hit" for another card or "Stay" to keep your total
+  
+  🏆 | To Win: If you're dealt 21, BLACKJACK!! - you instantly win (3:2 odds)! ~ OR ~ If you're closer to 21 than the dealer, you win!`
+}
   
 function closePopup() {
   document.getElementById("game-rules").style.display = "none"
@@ -352,6 +376,7 @@ fiftyBtnEl.addEventListener('click', betFifty)
 allInBtnEl.addEventListener('click', betAllIn)
 hundredBtnEl.addEventListener('click', betHundred)
 startGameBtn.addEventListener('click', playGame)
+window.addEventListener("load", resetGame)
 
 
 
