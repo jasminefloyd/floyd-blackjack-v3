@@ -129,6 +129,7 @@ function dealDealerCards() {
   dealer.sum = sum
   dealer.card2 = secondCard.image
   dealerCard1El.src = `${firstCard.image}`
+  dealerCard2El.src = `./assets/images/cards/card_red_back.png`
 }
 
 function playerHit() {
@@ -189,7 +190,7 @@ function checkWin() {
 function checkBlackjack() {
   if (player.sum === 21) {
     playMessageEl.innerHTML = `Blackjack!! You Win`
-    dealerCard2El.src = `${card.image}`
+    dealerCard2El.src = `${dealer.card2}`
     dealerMessageEl.style.display = ('initial')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
@@ -224,6 +225,7 @@ function playAgain() {
   hitBtnEl.style.display = `initial`
   stayBtnEl.style.display = `initial`
   playAgainBtnEl.style.display = `none`
+  dealerMessageEl.style.display = `none`
   dealPlayerCards()
   dealDealerCards()
   checkBlackjack()
