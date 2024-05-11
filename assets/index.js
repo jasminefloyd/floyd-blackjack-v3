@@ -1,7 +1,7 @@
 //Objects
 const player = {
   name: "",
-  chips: 0,
+  chips: 1000,
   sum: 0
 }
 
@@ -72,12 +72,18 @@ let deck = [
 var firstCard
 var secondCard
 var sum
+var gamePot = 0
 
 //DOM Variables
 const buttonEl = document.getElementById('rules-btn')
 const playAgainBtnEl = document.getElementById('play-again-btn')
 const hitBtnEl = document.getElementById('hit-btn')
 const stayBtnEl = document.getElementById('stay-btn')
+const startGameBtn = document.getElementById('start-game-btn')
+const twentyFiveBtnEl = document.getElementById('twenty-five-btn')
+const fiftyBtnEl = document.getElementById('fifty-btn')
+const allInBtnEl = document.getElementById('all-in-btn')
+const hundredBtnEl = document.getElementById('hundred-btn')
 
 const playMessageEl = document.getElementById('play-message')
 const dealtCardsEl = document.getElementById('dealt-cards')
@@ -88,8 +94,10 @@ const tableCard4El = document.getElementById('tCard4')
 const dealerCard1El = document.getElementById('dCard1')
 const dealerCard2El = document.getElementById('dCard2')
 const dealerMessageEl = document.getElementById('dealerMessage')
-
-
+const potAmountMessageEl = document.getElementById('pot-amount-message')
+const betMessageEl = document.getElementById('bet-message')
+const playerWalletMessageEl = document.getElementById('player-wallet-message')
+const betButtonAreaEl = document.getElementById('bet-button-area')
 
 //Audio Files
 const playerWinSound = new Audio('./assets/audio/round-won.wav')
@@ -135,19 +143,18 @@ function dealDealerCards() {
 function playerHit() {
   let card = selectRandomCard(deck)
   player.sum += card.value
-  if (tableCard3El.style.display == 'none') {
-    tableCard3El.style.display = ('initial')
+  if (tableCard3El.style.display == `none`) {
+    tableCard3El.style.display = `initial`
     tableCard3El.src = `${card.image}`
     playMessageEl.innerHTML = `You have ${player.sum}`
     checkBusted()
   } 
   else {
-  tableCard4El.style.display = ('initial')
+  tableCard4El.style.display = `initial`
   tableCard4El.src = `${card.image}`
   playMessageEl.innerHTML = `You have ${player.sum}`
   checkBusted()
 }
-
 
 }
 
@@ -155,10 +162,12 @@ function playerHit() {
 // update to show the dealer sum during check
 function checkWin() {
   if (player.sum > dealer.sum) {
-    playMessageEl.innerHTML = `You Win! You have ${player.sum}`
+    playMessageEl.innerHTML = `You have ${player.sum}. You Win ${gamePot * 2}`
     dealerCard2El.src = `${dealer.card2}`
     dealerMessageEl.style.display = ('block')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
+    player.chips += (gamePot * 2)
+    playerWalletMessageEl.innerHTML = `Player: ${player.chips}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `initial`
@@ -169,6 +178,7 @@ function checkWin() {
     dealerCard2El.src = `${dealer.card2}`
     dealerMessageEl.style.display = ('block')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
+    player.chips -= gamePot
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `initial`
@@ -179,6 +189,7 @@ function checkWin() {
     dealerCard2El.src = `${dealer.card2}`
     dealerMessageEl.style.display = ('block')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
+    player.chips += gamePot
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
     playAgainBtnEl.style.display = `flex`
@@ -191,7 +202,7 @@ function checkBlackjack() {
   if (player.sum === 21) {
     playMessageEl.innerHTML = `Blackjack!! You Win`
     dealerCard2El.src = `${dealer.card2}`
-    dealerMessageEl.style.display = ('initial')
+    dealerMessageEl.style.display = ('block')
     dealerMessageEl.innerHTML = `Dealer has ${dealer.sum}`
     hitBtnEl.style.display = `none`
     stayBtnEl.style.display = `none`
@@ -220,16 +231,106 @@ function playerStay() {
   checkWin()
 }
 
-function playAgain() {
+function betTwentyFive() {
+  gamePot += 25
+  player.chips -= 25
+  potAmountMessageEl.innerHTML = `Bet Amount: ${gamePot}`
+  playerWalletMessageEl.innerHTML = `Player: $${player.chips}`
+  buttonChecker()
+  minBetChecker()
+}
+
+function betFifty() {
+  gamePot += 50
+  player.chips -= 50
+  potAmountMessageEl.innerHTML = `Bet Amount: ${gamePot}`
+  playerWalletMessageEl.innerHTML = `Player: $${player.chips}`
+  buttonChecker()
+  minBetChecker()
+}
+
+function betHundred() {
+  gamePot += 100
+  player.chips -= 100
+  potAmountMessageEl.innerHTML = `Bet Amount: ${gamePot}`
+  playerWalletMessageEl.innerHTML = `Player: $${player.chips}`
+  buttonChecker()
+  minBetChecker()
+}
+
+function betAllIn() {
+  gamePot += player.chips
+  player.chips -= gamePot
+  potAmountMessageEl.innerHTML = `Bet Amount: ${gamePot}`
+  playerWalletMessageEl.innerHTML = `Player: $${player.chips}`
+  buttonChecker()
+  minBetChecker()
+}
+
+
+function buttonChecker() {
+  if (player.chips <= 99) {
+    hundredBtnEl.disabled = true
+    
+  }
+  if (player.chips <= 49) {
+    fiftyBtnEl.disabled = true
+    
+  }
+  if (player.chips <= 24) {
+    twentyFiveBtnEl.disabled = true
+    
+  }
+  if (player.chips === 0) {
+    allInBtnEl.disabled = true;
+    hundredBtnEl.disabled = true;
+    fiftyBtnEl.disabled = true;
+    twentyFiveBtnEl.disabled = true;
+    betMessageEl.style.color = ('red')
+    betMessageEl.style.fontWeight = ('bold')
+    betMessageEl.innerHTML = `You're out of chips!`
+    
+  }
+}
+
+function minBetChecker() {
+  if (gamePot >= 25) {
+    startGameBtn.style.display = `flex`
+  }
+  
+}
+
+function playGame() {
   cardShuffleSound.play()
-  hitBtnEl.style.display = `initial`
-  stayBtnEl.style.display = `initial`
-  playAgainBtnEl.style.display = `none`
-  dealerMessageEl.style.display = `none`
+  startGame()
   dealPlayerCards()
   dealDealerCards()
   checkBlackjack()
   checkBusted()
+}
+
+function resetGame() {
+  gamePot = 0
+  betButtonAreaEl.style.visibility = `initial`
+  hitBtnEl.style.display = `none`
+  stayBtnEl.style.display = `none`
+  playAgainBtnEl.style.display = `none`
+  dealerMessageEl.style.display = `none`
+  potAmountMessageEl.innerHTML = ` `
+  playMessageEl.style.display = `none`
+  }
+
+function playGameAgain () {
+  resetGame()
+}
+
+function startGame() {
+  hitBtnEl.style.display = `flex`
+  stayBtnEl.style.display = `flex`
+  startGameBtn.style.display = `none`
+  dealerMessageEl.style.display = `none`
+  potAmountMessageEl.innerHTML = ` `
+  betButtonAreaEl.style.visibility = `hidden`
 }
 
 
@@ -243,9 +344,14 @@ function closePopup() {
   
 // Listeners
 buttonEl.addEventListener('click', openPopup)
-playAgainBtnEl.addEventListener('click', playAgain)
+playAgainBtnEl.addEventListener('click', playGameAgain)
 hitBtnEl.addEventListener('click', playerHit)
 stayBtnEl.addEventListener('click', playerStay)
+twentyFiveBtnEl.addEventListener('click', betTwentyFive)
+fiftyBtnEl.addEventListener('click', betFifty)
+allInBtnEl.addEventListener('click', betAllIn)
+hundredBtnEl.addEventListener('click', betHundred)
+startGameBtn.addEventListener('click', playGame)
 
 
 

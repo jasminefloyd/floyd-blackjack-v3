@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=viewport, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>FDS Blackjack 3.0</title>
 </head>
@@ -48,25 +52,26 @@
                 <div class="game-pot-area" id="">
                     <p class="play-message" id="play-message">fff</p>
                     <img class="game-pot-img" src="./assets/images/chips_stack_p.png" />
-                    <p class="pot-amount-message">$3000</p>
+                    <p class="pot-amount-message" id="pot-amount-message"></p>
                 </div>
             </div>
 
             <div class="bottom-section">
                 <div class="bid-area" id="">
                     <div class="player-wallet">
-                        <p class="player-wallet-message">Player: $3000</p>
                         <img class="player-wallet-img" id="" src="./assets/images/chips_stack.png" />
+                        <p class="player-wallet-message" id="player-wallet-message">Player: $3000</p>
                     </div>
-                    <div class="bet-button-area" id="">
-                        <p class="bet-message">Place your bets</p>
-                        <button class="bet-buttons" id="">$25</button>
-                        <button class="bet-buttons" id="">$50</button>
-                        <button class="bet-buttons" id="">$100</button>
-                        <button class="bet-buttons" id="">All In</button>
+                    <div class="bet-button-area" id="bet-button-area">
+                        <p class="bet-message" id="bet-message">Place your bets</p>
+                        <button class="bet-buttons" id="twenty-five-btn">$25</button>
+                        <button class="bet-buttons" id="fifty-btn">$50</button>
+                        <button class="bet-buttons" id="hundred-btn">$100</button>
+                        <button class="bet-buttons" id="all-in-btn">All In</button>
                     </div>
                 </div>               
                 <div class="game-button-area" id="">
+                    <button class="game-buttons" id="start-game-btn">Start Game</button>
                     <button class="game-buttons" id="play-again-btn">Play Again</button>
                     <button class="game-buttons" id="hit-btn">Hit</button>
                     <button class="game-buttons" id="stay-btn">Stay</button>
